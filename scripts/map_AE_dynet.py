@@ -13,7 +13,6 @@ enc = sys.argv[2]
 bot = sys.argv[3]
 
 arch = str(enc) + 'T' + str(enc) + 'T' + str(enc) + 'T' + str(enc) + 'T'
-
 train_input = np.loadtxt(src)
 
 # Preprocess the data
@@ -52,10 +51,10 @@ for epoch in range(30):
      train_loss += loss.value()
      if count % num_toprint == 1:
      #    print "  Loss at epoch ", epoch, " after " , count, " examples is ", float(train_loss/count)
-         m.save('models/model_' + arch + '.pkl') 
+         m.save('models/model_' + arch) 
      loss.backward()
      if count % 100 == 1:
         trainer.update() 
   print "Train Loss after epoch ", epoch , " : ", float(train_loss/count)
-  m.save('models/model_' + arch + '_epoch' + str(epoch).zfill(3) + '.pkl')
+  m.save('models/model_' + arch + '_epoch' + str(epoch).zfill(3))
   print '\n'
