@@ -51,10 +51,10 @@ for epoch in range(30):
      train_loss += loss.value()
      if count % num_toprint == 1:
      #    print "  Loss at epoch ", epoch, " after " , count, " examples is ", float(train_loss/count)
-         m.save('models/model_' + arch) 
+         ae.save('models/' +  arch) 
      loss.backward()
      if count % 100 == 1:
         trainer.update() 
   print "Train Loss after epoch ", epoch , " : ", float(train_loss/count)
-  m.save('models/model_' + arch + '_epoch' + str(epoch).zfill(3))
+  ae.save('models/' + arch + '_latestepoch')
   print '\n'
