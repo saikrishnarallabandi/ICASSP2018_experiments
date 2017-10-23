@@ -12,7 +12,7 @@ src_name = sys.argv[1].split('/')[-1]
 enc = sys.argv[2]
 bot = sys.argv[3]
 
-arch = enc + 'T' + enc + 'T' + enc + 'T' + enc + 'T'
+arch = str(enc) + 'T' + str(enc) + 'T' + str(enc) + 'T' + str(enc) + 'T'
 
 train_input = np.loadtxt(src)
 
@@ -29,6 +29,8 @@ units_hidden_1 = int(enc)
 units_hidden_2 = int(bot)
 units_hidden_3 = int(enc)
 units_output = 50
+
+#arch = units_input + 'T' + units_hidden_1 + 'T' + units_hidden_2 + 'T' + units_hidden_3 + 'T' + units_output + 'T'
 
 # Instantiate AE and define the loss
 m = dy.Model()
@@ -48,10 +50,12 @@ for epoch in range(30):
      O = dy.inputTensor(o)
      loss = ae(I,O, 0)
      train_loss += loss.value()
-     #if count % num_toprint == 1:
+     if count % num_toprint == 1:
      #    print "  Loss at epoch ", epoch, " after " , count, " examples is ", float(train_loss/count)
+         m.save('models/model_' + arch + '.pkl') 
      loss.backward()
      if count % 100 == 1:
         trainer.update() 
   print "Train Loss after epoch ", epoch , " : ", float(train_loss/count)
+  m.save('models/model_' + arch + '_epoch' + str(epoch).zfill(3) + '.pkl')
   print '\n'
