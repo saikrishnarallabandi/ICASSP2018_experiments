@@ -52,6 +52,7 @@ for epoch in range(30):
      if count % num_toprint == 1:
      #    print "  Loss at epoch ", epoch, " after " , count, " examples is ", float(train_loss/count)
          ae.save('models/' +  arch) 
+         pickle.dump(input_scaler, open('models/' + arch + '/input_scaler', 'wb'))
      loss.backward()
      if count % 100 == 1:
         trainer.update() 
